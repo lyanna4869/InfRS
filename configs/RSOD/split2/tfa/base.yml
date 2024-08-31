@@ -1,0 +1,25 @@
+_BASE_: "../split.yml"
+MODEL:
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+
+  ROI_HEADS:
+    NAME: "StandardROIHeads"
+    OUTPUT_LAYER: "FastRCNNOutputLayers"
+    BATCH_SIZE_PER_IMAGE: 256
+    FREEZE_FEAT: False
+    UNFREEZE_FC1: False
+    UNFREEZE_FC2: False
+  ROI_BOX_HEAD:
+    
+    PROTOTYPE:
+      ENABLED: False
+      DISABLE_PROTOTYPE_GRAD: true    
+
+SOLVER:
+  BASE_LR: 0.0001
+  GAMMA: 0.5
+  STEPS:  (3500,4200)
+  MAX_ITER: 5000
+  CHECKPOINT_PERIOD: 10000
+  WARMUP_ITERS: 100

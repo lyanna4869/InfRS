@@ -1,0 +1,15 @@
+_BASE_: "base.yml"
+MODEL:
+  ROI_BOX_HEAD:
+    CONTRASTIVE_BRANCH:
+      LOSS_WEIGHT: 0.05
+SOLVER:
+  BASE_LR: 0.0003
+  STEPS:  (6000,)
+  MAX_ITER: 8000
+  WARMUP_ITERS: 200
+
+DATASETS:
+  TRAIN: ('rsod_trainval_novel1_1shot_seed1',)
+
+OUTPUT_DIR: "checkpoints/rsod/split1/1shot_inc_clp"

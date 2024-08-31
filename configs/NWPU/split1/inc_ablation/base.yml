@@ -1,0 +1,62 @@
+_BASE_: "../split.yml"
+TRAINER: "IncTrainer"
+
+MODEL:
+ # META_ARCHITECTURE: "RCNN_DoubleRPN" #RCNN_DoubleRPN没有了，因为没有用双RPN结构了
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHTS: "work_dirs/fsce_resnet101_base1_all_redetect/model_reset_surgery.pth"
+  # WEIGHTS: "weights/NWPU_R101.pth"
+
+  MASK_ON: False
+  BACKBONE:
+    FREEZE: True
+    FREEZE_AT: 5
+  ROI_HEADS:
+    NAME: "IncContrastROIHeads"
+    NUM_CLASSES: 10
+    COSINE_ON: True
+    FREEZE_FEAT: False
+    BATCH_SIZE_PER_IMAGE: 256
+    UNFREEZE_FC1: False
+    UNFREEZE_FC2: False
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  ROI_BOX_HEAD:
+    REDETECT: 
+      LOSS: "WS"
+    PROTOTYPE:
+      ENABLED: True
+      DATASET: "NWPU"
+      DISABLE_PROTOTYPE_GRAD: true
+      PATH: "checkpoints/nwpu/prototype/split1/prototype.feature"
+    CONTRASTIVE_BRANCH:
+      TEMPERATURE: 0.2
+      LOSS_WEIGHT: 0.1
+      MLP_FEATURE_DIM: 128
+      DECAY:
+        ENABLED: True
+        STEPS: [6000, 10000]
+        RATE: 0.1
+      IOU_THRESHOLD: 0.7  # high credibility proposals provide consistency
+
+INPUT:
+  CROP:
+    ENABLED: True
+DATASETS:
+  TRAIN: ('nwpu_trainval_novel1_10shot_seed10',)
+  TEST: ('nwpu_test_all1',)
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  TEST_IMS_PER_BATCH: 4
+  #BASE_LR: 0.001
+  BASE_LR: 0.0001
+  GAMMA: 0.1
+  STEPS:  (10000,)
+  MAX_ITER: 12000
+  CHECKPOINT_PERIOD: 4000
+  WARMUP_ITERS: 100
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 200

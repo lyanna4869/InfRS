@@ -1,0 +1,20 @@
+_BASE_: "base.yml"
+
+LOGGING_INTERVAL: 20
+MODEL:
+  # WEIGHTS: "/home/lwz/code/SConPro/weights/R-101.pkl"
+  # WEIGHTS: "checkpoints/rsod/base_train/split1/model_best.pth"
+  WEIGHTS: "weights/RSOD_R101_fsce.pth"
+  WEIGHTS: "weights/RSOD_R101_split1.pth"
+  ROI_HEADS:
+    SCORE_THRESH_TEST: 0.001  ## cover all bounding box
+  ROI_BOX_HEAD:
+    PROTOTYPE:
+      SAMPLE: True
+DATASETS:
+  TRAIN: ('rsod_trainval_base1_prototype',)
+  TEST: ('rsod_trainval_base1_prototype',)
+DATALOADER:
+  NUM_WORKERS: 4
+
+OUTPUT_DIR: "checkpoints/rsod/prototype/split1"

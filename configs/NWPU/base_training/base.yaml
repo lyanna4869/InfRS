@@ -1,0 +1,22 @@
+_BASE_: "../nwpu_base.yaml"
+MODEL:
+  WEIGHTS: "weights/R-101.pkl"
+  # WEIGHTS: "checkpoints/nwpu/base_train/split1/model_best.pth"
+  # WEIGHTS: "weights/NWPU_R101_fsce.pth"
+  MASK_ON: False
+  ROI_HEADS:
+    NUM_CLASSES: 7
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  STEPS: (1500,)
+  BASE_LR: 0.002
+  MAX_ITER: 5000
+  WARMUP_ITERS: 100
+  CHECKPOINT_PERIOD: 10000
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 400
+
+OUTPUT_DIR: "checkpoints/nwpu/base_train/split"

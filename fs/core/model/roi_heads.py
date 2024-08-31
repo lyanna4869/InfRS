@@ -1,0 +1,1 @@
+from fsdet.modeling.roi_heads.wf_roi_heads import BaseRedetectROIHeads

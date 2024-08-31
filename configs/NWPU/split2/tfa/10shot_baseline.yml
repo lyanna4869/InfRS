@@ -1,0 +1,13 @@
+_BASE_: "base.yml"
+
+DATASETS:
+  TRAIN: ('nwpu_trainval_novel2_10shot_seed12',)
+
+SOLVER:
+  BASE_LR: 0.0008
+  STEPS:  (6000, )
+  MAX_ITER: 10000
+  WARMUP_ITERS: 300
+
+
+OUTPUT_DIR: "checkpoints/nwpu/split2_fpn/10shot_baseline"

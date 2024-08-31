@@ -1,0 +1,38 @@
+_BASE_: "base.yaml"
+LOGGING_INTERVAL: 20
+MODEL:
+  # WEIGHTS: "/home/lwz/code/SConPro/weights/R-101.pkl"
+  # WEIGHTS: "checkpoints/nwpu/base_train/split1/model_best.pth"
+  WEIGHTS: "checkpoints/nwpu/all/split1/model_best.pth"
+  WEIGHTS: "checkpoints/nwpu/split1_fpn_ablation/3/model_best_novel.pth"
+  ROI_HEADS:
+    NUM_CLASSES: 7
+    SCORE_THRESH_TEST: 0.001  ## cover all bounding box
+  RPN:
+    PRE_NMS_TOPK_TEST: 2000
+    POST_NMS_TOPK_TEST: 30
+  ROI_BOX_HEAD:
+    PROTOTYPE:
+      ENABLED: True
+      SAMPLE: True
+      MAX_INS_COUNT_PER_CATEGORY: -1
+DATASETS:
+  TRAIN: ('nwpu_trainval_all1_prototype',)
+  TEST: ('nwpu_trainval_all1_prototype',)
+DATALOADER:
+  NUM_WORKERS: 4
+SOLVER:
+  STEPS: (800,)
+  IMS_PER_BATCH: 1
+  TEST_IMS_PER_BATCH: 4  ## must be 1, or tsne feature will be confused
+  MAX_ITER: 4000
+  WARMUP_ITERS: 100
+  CHECKPOINT_PERIOD: 500
+
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 500
+  DETECTIONS_PER_IMAGE: -1 ## use iou to get anchor, not score
+
+OUTPUT_DIR: "checkpoints/nwpu/tsne/split1"

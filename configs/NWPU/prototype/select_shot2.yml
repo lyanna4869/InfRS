@@ -1,0 +1,11 @@
+_BASE_: "base.yml"
+
+MODEL:
+  ROI_HEADS:
+    SCORE_THRESH_TEST: 0.05  ## cover all bounding box
+DATASETS:
+  TRAIN: ('nwpu_trainval_all2_prototype',)
+  TEST: ('nwpu_trainval_all2_prototype',)
+
+
+OUTPUT_DIR: "checkpoints/nwpu/prototype/select_shot"

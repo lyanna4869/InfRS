@@ -1,0 +1,20 @@
+_BASE_: "base.yaml"
+LOGGING_INTERVAL: 20
+MODEL:
+
+#  WEIGHTS: "checkpoints/nwpu/all/split1/model_best.pth"
+  WEIGHTS: "checkpoints/nwpu/split1_fpn/10shot_baseline/model_0001999.pth"
+
+SOLVER:
+  STEPS: (800,)
+  IMS_PER_BATCH: 1
+  MAX_ITER: 4000
+  WARMUP_ITERS: 100
+
+OUTPUT_DIR: "checkpoints/nwpu/tsne/split1/tfa"
+TEST:
+  DETECTIONS_PER_IMAGE: 1 ## use iou to get anchor, not score
+
+TSNE:
+  DST: "tsne_tfa_1_50"
+  TITLE: ""

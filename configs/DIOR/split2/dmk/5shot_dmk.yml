@@ -1,0 +1,11 @@
+_BASE_: "base.yml"
+
+SOLVER:
+  BASE_LR: 0.0002
+  STEPS:  (6000, 9000)
+  MAX_ITER: 10000
+
+DATASETS:
+  TRAIN: ('dior_trainval_novel2_5shot_seed4',)
+
+OUTPUT_DIR: "checkpoints/dior/split2/5shot_rsdmk"

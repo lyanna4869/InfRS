@@ -1,0 +1,13 @@
+_BASE_: "base.yml"
+MODEL:
+  WEIGHTS: "work_dirs/fsce_resnet101_base1_all_redetect/model_reset_surgery.pth"
+DATASETS:
+  TRAIN: ('nwpu_trainval_novel1_5shot_seed8',)
+SOLVER:
+  BASE_LR: 0.0004
+  STEPS:  (6000, )
+  MAX_ITER: 8000
+  WARMUP_ITERS: 600
+
+
+OUTPUT_DIR: "checkpoints/nwpu/split1_fpn/5shot_baseline"

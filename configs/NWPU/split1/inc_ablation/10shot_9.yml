@@ -1,0 +1,11 @@
+_BASE_: "base.yml"
+
+MODEL:
+  ROI_HEADS:
+    COEFF: 0.9
+
+  ROI_BOX_HEAD:
+    CONTRASTIVE_BRANCH:
+      LOSS_WEIGHT: 0.9
+
+OUTPUT_DIR: "checkpoints/nwpu/split1_fpn_ablation/9"

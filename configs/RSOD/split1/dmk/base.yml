@@ -1,0 +1,36 @@
+_BASE_: "../split.yml"
+
+MODEL:
+  ROI_HEADS:
+    NAME: "RedetectROIHeadsV1"
+
+    COSINE_ON: True
+    COEFF: 0.1
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000
+  ROI_BOX_HEAD:
+    REDETECT: 
+      LOSS: "MS"
+    BOX_REG_WEIGHT: 1.0
+    BOX_CLS_WEIGHT: 1.0
+    CONTRASTIVE_BRANCH:
+      TEMPERATURE: 0.2
+      LOSS_WEIGHT: 0.9
+      MLP_FEATURE_DIM: 128
+      DECAY:
+        ENABLED: True
+        STEPS: [6000, 10000]
+        RATE: 0.5
+      IOU_THRESHOLD: 0.7  # high credibility proposals provide consistency
+    PROTOTYPE:
+      ENABLED: False
+
+SOLVER:
+  BASE_LR: 0.0001
+  GAMMA: 0.1
+  CHECKPOINT_PERIOD: 10000
+  WARMUP_ITERS: 100
+

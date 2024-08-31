@@ -1,0 +1,16 @@
+_BASE_: "base.yml"
+MODEL:
+  WEIGHTS: "weights/DIOR_R101_all.pth"
+  ROI_HEADS:
+    SCORE_THRESH_TEST: 0.05  ## cover all bounding box
+
+  RPN:
+    PRE_NMS_TOPK_TEST: 2000
+    POST_NMS_TOPK_TEST: 30
+
+DATASETS:
+  TRAIN: ('dior_train_all1_prototype',)
+  TEST: ('dior_train_all1_prototype',)
+
+
+OUTPUT_DIR: "checkpoints/dior/prototype/select_shot"

@@ -1,0 +1,29 @@
+_BASE_: "../split.yml"
+MODEL:
+  ROI_HEADS:
+    NAME: "StandardROIHeads"
+
+    OUTPUT_LAYER: "FastRCNNOutputLayers"
+
+  ROI_BOX_HEAD:
+    BOX_REG_WEIGHT: 1.0
+    BOX_CLS_WEIGHT: 1.0
+    
+    PROTOTYPE:
+      ENABLED: False
+      DATASET: "NWPU"
+      DISABLE_PROTOTYPE_GRAD: true
+
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000
+
+DATASETS:
+  TRAIN: ('nwpu_trainval_novel3_10shot_seed10',)
+SOLVER:
+  IMS_PER_BATCH: 4
+  GAMMA: 0.5
+  CHECKPOINT_PERIOD: 10000
+  WARMUP_ITERS: 100

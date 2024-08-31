@@ -1,0 +1,19 @@
+_BASE_: "base.yaml"
+MODEL:
+  WEIGHTS: "weights/R-101.pkl"
+  WEIGHTS: "checkpoints/nwpu/base_train/split1/model_best.pth"
+  # WEIGHTS: "weights/NWPU_R101_fsce.pth"
+
+DATASETS:
+  TRAIN: ('nwpu_trainval_base1',)
+  TEST: ('nwpu_test_base1',)
+SOLVER:
+  STEPS: (1500,)
+  BASE_LR: 0.004
+  MAX_ITER: 5000
+  WARMUP_ITERS: 500
+TEST:
+  EVAL_PERIOD: 400
+
+OUTPUT_DIR: "checkpoints/nwpu/base_train/split1"
+

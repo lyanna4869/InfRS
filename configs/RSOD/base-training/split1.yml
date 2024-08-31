@@ -1,0 +1,22 @@
+_BASE_: "base.yaml"
+MODEL:
+  WEIGHTS: "weights/R-101.pkl"
+  WEIGHTS: "checkpoints/rsod/base_train/split1/model_best.pth"
+  # WEIGHTS: "weights/DOTA_R101_fsce.pth"
+  ROI_HEADS:
+    OUTPUT_CLS: "FocalLoss_Outputs"
+DATASETS:
+  TRAIN: ('rsod_trainval_base1',)
+  TEST: ('rsod_test_base1',)
+SOLVER:
+  STEPS: (7000,)
+  BASE_LR: 0.006
+  MAX_ITER: 10000
+  WARMUP_ITERS: 500
+DATALOADER:
+  NUM_WORKERS: 4
+TEST:
+  EVAL_PERIOD: 400
+
+OUTPUT_DIR: "checkpoints/rsod/base_train/split1"
+

@@ -1,0 +1,49 @@
+_BASE_: "../dior_base.yaml"
+
+MODEL:
+  WEIGHTS: "work_dirs/dior_resnet101_base1_all_redetect/model_reset_surgery.pth"
+  MASK_ON: False
+  
+  BACKBONE:
+    FREEZE: True
+    FREEZE_AT: 5
+ 
+  ROI_HEADS:
+    NUM_CLASSES: 20
+    BATCH_SIZE_PER_IMAGE: 256
+    FREEZE_FEAT: False
+    UNFREEZE_FC1: False
+    UNFREEZE_FC2: False
+    
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000
+  ROI_BOX_HEAD:
+    BOX_REG_WEIGHT: 1.0
+    BOX_CLS_WEIGHT: 1.0
+
+    PROTOTYPE:
+      ENABLED: False
+      DATASET: "DIOR"
+
+INPUT:
+  MIN_SIZE_TEST: 800
+  CROP:
+    ENABLED: True
+DATASETS:
+  TEST: ('dior_val_all1',)
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  TEST_IMS_PER_BATCH: 4
+  BASE_LR: 0.0001
+  GAMMA: 0.1
+  CHECKPOINT_PERIOD: 10000
+  WARMUP_ITERS: 100
+
+
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 800

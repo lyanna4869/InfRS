@@ -1,0 +1,23 @@
+_BASE_: "base.yaml"
+MODEL:
+  WEIGHTS: "weights/R-101.pkl"
+  # WEIGHTS: "checkpoints/rsod/base_train/split3/model_best.pth"
+  # WEIGHTS: "work_dirs/fsce_resnet101_base1_all_redetect/model_reset_surgery.pth"
+  ROI_HEADS:
+    OUTPUT_CLS: "FocalLoss_Outputs"
+DATASETS:
+  TRAIN: ('rsod_trainval_base3',)
+  TEST: ('rsod_test_base3',)
+SOLVER:
+  STEPS: (8000, 12000)
+  BASE_LR: 0.002
+  MAX_ITER: 15000
+  WARMUP_ITERS: 100
+  CHECKPOINT_PERIOD: 6000
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 1000
+
+OUTPUT_DIR: "checkpoints/rsod/base_train/split3"
+

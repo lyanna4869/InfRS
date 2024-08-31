@@ -1,0 +1,18 @@
+_BASE_: "base.yml"
+
+LOGGING_INTERVAL: 20
+MODEL:
+
+  WEIGHTS: "weights/NWPU_R101_split3.pth"
+  ROI_HEADS:
+    SCORE_THRESH_TEST: 0.001  ## cover all bounding box
+  ROI_BOX_HEAD:
+    PROTOTYPE:
+      SAMPLE: True
+DATASETS:
+  TRAIN: ('nwpu_trainval_base3_prototype',)
+  TEST: ('nwpu_trainval_base3_prototype',)
+DATALOADER:
+  NUM_WORKERS: 4
+
+OUTPUT_DIR: "checkpoints/nwpu/prototype/split3"

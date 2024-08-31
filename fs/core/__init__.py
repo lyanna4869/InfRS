@@ -1,0 +1,1 @@
+from fsdet.modeling.proposal_generator import wf_rpn

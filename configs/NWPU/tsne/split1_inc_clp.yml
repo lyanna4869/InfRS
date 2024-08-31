@@ -1,0 +1,15 @@
+_BASE_: "base.yaml"
+MODEL:
+  WEIGHTS: "checkpoints/nwpu/split1_fpn/10shot_inc_clp/model_best.pth"
+  
+SOLVER:
+  STEPS: (800,)
+
+TEST:
+  DETECTIONS_PER_IMAGE: -1 ## use iou to get anchor, not score
+
+TSNE:
+  DST: "tsne_inc_clp_50"
+  TITLE: ""
+
+OUTPUT_DIR: "checkpoints/nwpu/tsne/split1/inc_clp"

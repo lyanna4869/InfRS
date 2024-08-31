@@ -1,0 +1,24 @@
+_BASE_: "../split.yml"
+MODEL:
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  ROI_HEADS:
+    NAME: "StandardROIHeads"
+
+  ROI_BOX_HEAD:
+    PROTOTYPE:
+      ENABLED: False
+
+DATASETS:
+  TRAIN: ('rsod_train_novel1_10shot_seed10',)
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.0001
+  GAMMA: 0.5
+  STEPS:  (3500,4200)
+  MAX_ITER: 5000
+  CHECKPOINT_PERIOD: 10000
+  WARMUP_ITERS: 100
+

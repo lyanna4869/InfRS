@@ -1,0 +1,27 @@
+_BASE_: "../split.yml"
+TRAINER: "IncTrainer"
+
+MODEL:
+
+  ROI_HEADS:
+    NAME: "ContrastiveROIHeads"
+
+    COSINE_ON: True
+    COEFF: 0.0
+
+  ROI_BOX_HEAD:
+    CONTRASTIVE_BRANCH:
+      LOSS_VERSION: "V1"
+      TEMPERATURE: 0.2
+      LOSS_WEIGHT: 0.9
+      MLP_FEATURE_DIM: 128
+      DECAY:
+        ENABLED: True
+        STEPS: [6000, 10000]
+        RATE: 0.5
+      IOU_THRESHOLD: 0.7  # high credibility proposals provide consistency
+    PROTOTYPE:
+      ENABLED: false
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False

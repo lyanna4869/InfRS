@@ -1,0 +1,19 @@
+_BASE_: "../split.yml"
+MODEL:
+  BACKBONE:
+    FREEZE: True
+    FREEZE_AT: 5
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  ROI_HEADS:
+    NAME: "StandardROIHeads"
+
+    OUTPUT_LAYER: "FastRCNNOutputLayers"
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.0001
+  STEPS:  (3500,4200)
+  MAX_ITER: 5000
+  WARMUP_ITERS: 100

@@ -1,0 +1,1 @@
+from fsdet.structures.anno import VocAnnotation, VocInstance

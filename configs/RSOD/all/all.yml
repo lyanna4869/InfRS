@@ -1,0 +1,22 @@
+_BASE_: "../rsod_base.yaml"
+MODEL:
+  # WEIGHTS: "checkpoints/rsod/all/split1/model_best.pth"
+  ROI_HEADS:
+    NUM_CLASSES: 10
+DATASETS:
+  TRAIN: ('rsod_trainval_all1',)
+  TEST: ('rsod_test_all1',)
+SOLVER:
+  IMS_PER_BATCH: 4
+  STEPS: (4000, 7000,)
+  BASE_LR: 0.004
+  MAX_ITER: 8000
+  WARMUP_ITERS: 100
+  CHECKPOINT_PERIOD: 4000
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 500
+
+OUTPUT_DIR: "checkpoints/rsod/all/"
+

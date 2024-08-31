@@ -1,0 +1,13 @@
+_BASE_: "base.yml"
+
+SOLVER:
+  BASE_LR: 0.0015
+  STEPS:  (6000, 9000)
+  MAX_ITER: 5000
+
+DATASETS:
+  TRAIN: ('rsod_trainval_novel3_5shot_seed5',)
+
+OUTPUT_DIR: "checkpoints/rsod/split3/5shot_fsce"
+TEST:
+  EVAL_START: 1000

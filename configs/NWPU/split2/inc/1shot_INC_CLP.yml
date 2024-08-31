@@ -1,0 +1,17 @@
+_BASE_: "base.yml"
+
+SOLVER:
+  IMS_PER_BATCH: 4
+  TEST_IMS_PER_BATCH: 4
+  #BASE_LR: 0.001
+  BASE_LR: 0.0003
+  GAMMA: 0.1
+  STEPS:  (10000,)
+  MAX_ITER: 12000
+  CHECKPOINT_PERIOD: 4000
+  WARMUP_ITERS: 100
+
+DATASETS:
+  TRAIN: ('nwpu_trainval_novel2_1shot_seed1',)
+
+OUTPUT_DIR: "checkpoints/nwpu/split2_fpn/1shot_inc_clp"

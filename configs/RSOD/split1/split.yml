@@ -1,0 +1,31 @@
+_BASE_: "../rsod_base.yaml"
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHTS: "work_dirs/rsod_resnet101_base1_all_redetect/model_reset_surgery.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+
+  BACKBONE:
+    FREEZE: True
+    FREEZE_AT: 5
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000 
+  ROI_HEADS:
+    NUM_CLASSES: 4       
+  ROI_BOX_HEAD:
+    BOX_REG_WEIGHT: 1.0
+    BOX_CLS_WEIGHT: 1.0
+        
+DATASETS:
+  TEST: ('rsod_val_all1',)
+
+INPUT:
+  MIN_SIZE_TEST: 800
+  CROP:
+    ENABLED: True
+
+TEST:
+  AUG:
+    ENABLED: True
+  EVAL_PERIOD: 400

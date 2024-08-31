@@ -1,0 +1,13 @@
+_BASE_: "base.yml"
+MODEL:
+  WEIGHTS: "checkpoints/rsod/split3/5shot_baseline/model_best.pth"
+DATASETS:
+  TRAIN: ('rsod_trainval_novel3_5shot_seed5',)
+
+SOLVER:
+  BASE_LR: 0.0005
+  STEPS:  (11000,)
+  MAX_ITER: 5000
+
+
+OUTPUT_DIR: "checkpoints/rsod/split3/5shot_baseline"

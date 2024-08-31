@@ -1,0 +1,43 @@
+_BASE_: "../split.yml"
+TRAINER: "IncTrainer"
+
+MODEL:
+  ROI_HEADS:
+    NAME: "IncContrastROIHeads"
+
+    COSINE_ON: True
+    # COEFF: 0.1
+
+  ROI_BOX_HEAD:
+    BOX_REG_WEIGHT: 1.0
+    BOX_CLS_WEIGHT: 1.0
+    REDETECT:
+      LOSS: "WS"
+    CONTRASTIVE_BRANCH:
+      TEMPERATURE: 0.2
+      LOSS_WEIGHT: 0.9
+      MLP_FEATURE_DIM: 128
+      DECAY:
+        ENABLED: True
+        STEPS: [6000, 10000]
+        RATE: 0.5
+      IOU_THRESHOLD: 0.7  # high credibility proposals provide consistency
+    PROTOTYPE:
+      ENABLED: True
+      # SAMPLE: True
+      DATASET: "NWPU"
+      DISABLE_PROTOTYPE_GRAD: true
+      PATH: "checkpoints/nwpu/prototype/split3/prototype.feature"
+
+
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000
+
+SOLVER:
+  BASE_LR: 0.0001
+  GAMMA: 0.1
+  STEPS:  (10000,)
+  MAX_ITER: 12000
+  WARMUP_ITERS: 100
